@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin UMKM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Login Admin</h2>
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="pass" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<div id="panel" style="display:none">
+  <h3>Kelola Produk</h3>
+  <input id="nama" placeholder="Nama Produk">
+  <input id="harga" placeholder="Harga">
+  <input id="bahan" placeholder="Bahan">
+  <input id="img" placeholder="Link Gambar">
+  <button onclick="tambah()">Tambah Produk</button>
+
+  <ul id="list"></ul>
+</div>
+
+<script>
+let produk = JSON.parse(localStorage.getItem("produk")) || [];
+
+function login() {
+  if (user.value === "admin" && pass.value === "123") {
+    panel.style.display = "block";
+  } else {
+    alert("Login gagal!");
+  }
+}
+
+function render() {
+  list.innerHTML = "";
+  produk.forEach((p, i) => {
+    list.innerHTML += `
+      <li>${p.nama} 
+      <button onclick="hapus(${i})">Hapus</button></li>
+    `;
+  });
+}
+
+function tambah() {
+  produk.push({
+    nama: nama.value,
+    harga: harga.value,
+    bahan: bahan.value,
+    img: img.value
+  });
+  localStorage.setItem("produk", JSON.stringify(produk));
+  render();
+}
+
+function hapus(i) {
+  produk.splice(i,1);
+  localStorage.setItem("produk", JSON.stringify(produk));
+  render();
+}
+
+render();
+</script>
+
+</body>
+</html>

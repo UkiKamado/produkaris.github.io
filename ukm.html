@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>UMKM Lokal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>UMKM Lokal</h1>
+  <p>Produk Berkualitas & Terjangkau</p>
+</header>
+
+<main class="produk-container" id="produkList"></main>
+
+<footer>
+  <a class="wa-btn" href="https://wa.me/081372440713" target="_blank">
+    Hubungi Penjual via WhatsApp
+  </a>
+</footer>
+
+<script>
+const produkDefault = [
+  { nama: "Kopi Arabika", harga: "Rp25.000", bahan: "Biji kopi Arabika", img: "img/kopi.jpg" },
+  { nama: "Teh Herbal", harga: "Rp20.000", bahan: "Daun herbal alami", img: "img/teh.jpg" },
+  { nama: "Keripik Pisang", harga: "Rp15.000", bahan: "Pisang pilihan", img: "img/pisang.jpg" },
+  { nama: "Sambal UMKM", harga: "Rp18.000", bahan: "Cabai, bawang", img: "img/sambal.jpg" },
+  { nama: "Kue Kering", harga: "Rp30.000", bahan: "Tepung & mentega", img: "img/kue.jpg" },
+  { nama: "Madu Asli", harga: "Rp50.000", bahan: "Madu alami", img: "img/madu.jpg" },
+  { nama: "Abon Sapi", harga: "Rp40.000", bahan: "Daging sapi", img: "img/sapi.jpg" },
+  { nama: "Kerupuk Ikan", harga: "Rp12.000", bahan: "Ikan segar", img: "img/ikan.jpg" },
+  { nama: "Minyak Kelapa", harga: "Rp35.000", bahan: "Kelapa murni", img: "img/kelapa.jpg" },
+  { nama: "Gula Aren", harga: "Rp22.000", bahan: "Nira aren", img: "img/gula.jpg" }
+];
+
+const produk = JSON.parse(localStorage.getItem("produk")) || produkDefault;
+
+const list = document.getElementById("produkList");
+
+produk.forEach(p => {
+  list.innerHTML += `
+    <div class="card">
+      <img src="${p.img}">
+      <h3>${p.nama}</h3>
+      <p>${p.harga}</p>
+      <small>Bahan: ${p.bahan}</small>
+    </div>
+  `;
+});
+</script>
+
+</body>
+</html>
